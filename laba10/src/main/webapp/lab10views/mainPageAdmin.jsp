@@ -1,0 +1,359 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin page</title>
+  <link href="mainPageTableStyle_10.css" rel="stylesheet" type="text/css">
+  <link href="signInStyle_10.css" rel="stylesheet" type="text/css">
+  <style>
+    #container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    #add-remove-div {
+      margin-right: 280px;
+      margin-left: 200px;
+      margin-top: 100px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    table {
+      width: 50%;
+      border: none;
+      margin-bottom: 40px;
+      margin-left: 80px;
+      margin-top: 100px;
+      border-collapse: separate;
+    }
+    table thead th {
+      font-weight: bold;
+      text-align: left;
+      border: none;
+      padding: 10px 15px;
+      background: #ededed;
+      font-size: 17px;
+      border-top: 1px solid #ddd;
+    }
+    table tr th:first-child,
+    .table tr td:first-child {
+      border-left: 1px solid #ddd;
+    }
+    table tr th:last-child,
+    .table tr td:last-child {
+      border-right: 1px solid #ddd;
+    }
+    table thead tr th:first-child {
+      border-radius: 20px 0 0 0;
+    }
+    table thead tr th:last-child {
+      border-radius: 0 20px 0 0;
+    }
+    table tbody td {
+      text-align: left;
+      border: none;
+      padding: 10px 15px;
+      font-size: 17px;
+      vertical-align: top;
+    }
+    table tbody tr:nth-child(even) {
+      background: #f8f8f8;
+    }
+    table tbody tr:last-child td {
+      border-bottom: 1px solid #ddd;
+    }
+    table tbody tr:last-child td:first-child {
+      border-radius: 0 0 0 20px;
+    }
+    table tbody tr:last-child td:last-child {
+      border-radius: 0 0 20px 0;
+    }
+
+    * {
+      font-family: -apple-system, BlinkMacSystemFont, 'San Francisco', Helvetica,
+      Arial, sans-serif;
+      font-weight: 300;
+      margin: 0;
+    }
+    /*$primary: rgb(182,157,230);*/
+    html,
+    body {
+      height: 100vh;
+      width: 100vw;
+      margin: 0 0;
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+      background: #f3f2f2;
+    }
+    h4 {
+      font-size: 24px;
+      font-weight: 600;
+      color: #000;
+      opacity: 0.85;
+    }
+    label {
+      font-size: 12.5px;
+      color: #000;
+      opacity: 0.8;
+      font-weight: 400;
+    }
+
+    form > h4 {
+      margin-bottom: 20px;
+      color: rgba(0, 0, 0, 0.5);
+    }
+
+    form > span {
+      color: rgba(0, 0, 0, 0.5);
+      font-weight: 700;
+    }
+
+    form > p {
+      color: darkred;
+      line-height: 155%;
+      font-size: 14px;
+      color: #000;
+      opacity: 0.65;
+      font-weight: 400;
+      max-width: 200px;
+      margin-top: 37px;
+      margin-bottom: 3px;
+    }
+
+    form {
+      padding: 40px 30px;
+      background: #fefefe;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding-bottom: 20px;
+      width: 300px;
+    }
+
+    a.discrete {
+      color: rgba(0, 0, 0, 0.4);
+      font-size: 15px;
+      border-bottom: solid 1px rgba(0, 0, 0, 0);
+      padding-bottom: 4px;
+      margin-left: auto;
+      font-weight: 300;
+      transition: all 0.3s ease;
+      margin-top: 40px;
+    }
+
+    a.discrete:hover {
+      border-bottom: solid 1px rgba(0, 0, 0, 0.2);
+    }
+
+    button {
+      -webkit-appearance: none;
+      width: auto;
+      min-width: 100px;
+      border-radius: 24px;
+      text-align: center;
+      padding: 15px 40px;
+      margin-top: 5px;
+      background-color: #c672ff;
+      color: #fff;
+      font-size: 14px;
+      margin-left: auto;
+      font-weight: 500;
+      box-shadow: 0px 2px 6px -1px rgba(0, 0, 0, 0.13);
+      border: none;
+      transition: all 0.3s ease;
+      outline: 0;
+    }
+    button:hover {
+      transform: translateY(-3px);
+      /*box-shadow: 0 2px 6px -1px rgba($ primary, .65);*/
+    }
+
+    button:active {
+      transform: scale(0.99);
+    }
+
+    input {
+      font-size: 16px;
+      padding: 20px 0px;
+      height: 56px;
+      border: none;
+      border-bottom: solid 1px rgba(0, 0, 0, 0.1);
+      background: #fff;
+      width: 280px;
+      box-sizing: border-box;
+      transition: all 0.3s linear;
+      color: #000;
+      font-weight: 400;
+    }
+
+    input:focus {
+      border-bottom: solid 1px black;
+      outline: 0;
+      box-shadow: 0 2px 6px -8px rgba(0, 0, 0, 0.45);
+    }
+
+    .floating-label {
+      position: relative;
+      margin-bottom: 10px;
+      width: 100%;
+    }
+    .floating-label > label {
+      position: absolute;
+      top: calc(50% - 7px);
+      left: 0;
+      opacity: 0;
+      transition: all 0.3s ease;
+      padding-left: 44px;
+    }
+    .floating-label > input {
+      width: calc(100% - 44px);
+      margin-left: auto;
+      display: flex;
+    }
+    .floating-label > .icon {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 56px;
+      width: 44px;
+      display: flex;
+    }
+    .floating-label > icon > svg {
+      height: 30px;
+      width: 30px;
+      margin: auto;
+      opacity: 0.15;
+      transition: all 0.3s ease;
+    }
+    .floating-label > icon > svg > path {
+      transition: all 0.3s ease;
+    }
+
+    input:not(:placeholder-shown) {
+      padding: 28px 0px 12px 0px;
+    }
+    input:not(:placeholder-shown) + label {
+      transform: translateY(-10px);
+      opacity: 0.7;
+    }
+    input:valid:not(:placeholder-shown) + label + .icon > svg {
+      opacity: 1;
+    }
+
+    input:valid:not(:placeholder-shown) + label + .icon > svg > path {
+      fill: black;
+    }
+
+    input:not(:valid):not(:focus) + label + .icon {
+      animation-name: shake-shake;
+      animation-duration: 0.3s;
+    }
+
+    @keyframes shake-shake {
+      0% {
+        transform: translateX(-10px);
+      }
+      20% {
+        transform: translateX(-10px);
+      }
+      40% {
+        transform: translateX(-10px);
+      }
+      60% {
+        transform: translateX(10px);
+      }
+      80% {
+        transform: translateX(-10px);
+      }
+      100% {
+        transform: translateX(0px);
+      }
+    }
+    .session {
+      display: flex;
+      flex-direction: row;
+      width: auto;
+      height: auto;
+      margin: auto auto;
+      background: #ffffff;
+      border-radius: 4px;
+      box-shadow: 0px 2px 6px -1px rgba(0, 0, 0, 0.12);
+    }
+    .left {
+      width: 220px;
+      height: auto;
+      min-height: 100%;
+      position: relative;
+      background-image: url('https://images.pexels.com/photos/114979/pexels-photo-114979.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
+      background-size: cover;
+      border-top-left-radius: 4px;
+      border-bottom-left-radius: 4px;
+    }
+    .left > svg {
+      height: 40px;
+      width: auto;
+      margin: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<jsp:include page="header.jsp"/>
+
+<div id="container">
+  <div id="tableDiv">
+    <table>
+      <thead>
+      <tr>
+        <th>Логин</th>
+        <th>Пароль</th>
+        <th>Роль</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <c:forEach step="1" varStatus="loopCounter" items="${usersList}" var="user">
+        <tr>
+          <td>
+            <c:out value="${user.getUserName()}" />
+          </td>
+          <td>
+            <c:out value="${user.getUserPassword()}" />
+          </td>
+          <td>
+            <c:out value="${user.getUserRole()}" />
+          </td>
+        </tr>
+      </c:forEach>
+      </tbody>
+    </table>
+  </div>
+
+
+  <div id="add-remove-div">
+    <form id="add-form" method="post" action="${pageContext.request.contextPath}/Main-Admin-Servlet">
+      <h3 style="font-weight: bold">Добавить пользователя</h3>
+      <input type="text" placeholder="Логин" name="login" autocomplete="off"/>
+      <input type="text" placeholder="Пароль" name="password" autocomplete="off"/>
+      <input type="text" placeholder="Роль" name="role" autocomplete="off"/>
+      <button type="submit">Добавить</button>
+    </form>
+    <br/><br/>
+    <form id="remove-form" method="get" action="${pageContext.request.contextPath}/Main-Admin-Servlet">
+      <h3 style="font-weight: bold">Удалить пользователя</h3>
+      <input type="text" placeholder="Логин" name="login" autocomplete="off"/>
+      <button type="submit">Удалить</button>
+    </form>
+  </div>
+
+</div>
+<jsp:include page="footer.jsp"/>
+</body>
+</html>

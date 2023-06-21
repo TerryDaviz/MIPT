@@ -1,0 +1,4 @@
+<template>
+  <input-field default="4.0">WEB_XML_VERSION</input-field>
+  <input-field default="GlassFish 7.0.3">IJ_APPLICATION_SERVER</input-field>
+</template>
