@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<bands>
+    <band>
+        <name>Rantera</name>
+        <memebersAmount>4</memebersAmount>
+        <members>
+            <member>Dimebag Darrel</member>
+            <member>Vinnie Paul</member>
+            <member>Philipp Anselmo</member>
+            <member>Rex Brown</member>
+        </members>
+    </band>
+    <band>
+        <name>Meowtallica</name>
+        <membersAmount>4</membersAmount>
+        <members>
+            <member>tot chel, kotoryi riffy horosho igraet</member>
+            <member>tot, kotoryi ni odnoi pesni ne napisal</member>
+            <member>nu etot, kotoryi na barabanah igrat' ne umeet</member>
+            <member>bro, tebya ne shyshno...</member>
+        </members>
+    </band>
+</bands>
